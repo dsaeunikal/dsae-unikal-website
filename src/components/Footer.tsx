@@ -106,7 +106,7 @@
           <p>© {currentYear} DSAE-UNIKAL. Tous droits réservés.</p>
 
           <div className="footer-legal-links">
-            <a href="#">Confidentialité</a>
+            <a href="/confidentialite">Confidentialité</a>
             <a href="#">Sécurité</a>
             <a href="#">Cookies</a>
             <a href="#">Conditions Générales d’Utilisation</a>

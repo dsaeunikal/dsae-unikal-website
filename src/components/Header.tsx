@@ -1,146 +1,176 @@
 ﻿"use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-const translations = {
-  fr: {
-    news: "Actualités",
-    about: "À propos",
-    publications: "Publications",
-    research: "Recherches",
-    partners: "Partenaires",
-    alumni: "Alumni",
-    contacts: "Contacts",
-    search: "Rechercher",
-    searchTitle: "Recherche rapide",
-    searchPlaceholder: "Rechercher une page, une filière, une publication...",
-    noResult: "Aucun résultat trouvé.",
-    close: "Fermer",
-  },
-  en: {
-    news: "News",
-    about: "About",
-    publications: "Publications",
-    research: "Research",
-    partners: "Partners",
-    alumni: "Alumni",
-    contacts: "Contacts",
-    search: "Search",
-    searchTitle: "Quick search",
-    searchPlaceholder: "Search for a page, program, publication...",
-    noResult: "No result found.",
-    close: "Close",
-  },
+type Language = "fr" | "en";
+
+type NavItem = {
+  label: string;
+  href: string;
 };
 
-const searchItems = [
-  {
-    title: "Actualités",
-    titleEn: "News",
-    href: "#actualites",
-    keywords: "actualité actualités news une informations relance recherche scientifique",
-  },
-  {
-    title: "À propos",
-    titleEn: "About",
-    href: "#a-propos",
-    keywords: "à propos qui sommes nous vision mission valeurs slogan about",
-  },
-  {
-    title: "Publications",
-    titleEn: "Publications",
-    href: "#publications",
-    keywords: "publications documents articles auteurs télécharger recherche",
-  },
-  {
-    title: "Recherches",
-    titleEn: "Research",
-    href: "#recherche",
-    keywords: "recherche axes agriculture durable géomatique ia data science fermes expérimentales",
-  },
-  {
-    title: "Partenaires",
-    titleEn: "Partners",
-    href: "#partenaires",
-    keywords: "partenaires coopération universités institutions organisations partenaires",
-  },
-  {
-    title: "Production végétale",
-    titleEn: "Crop production",
-    href: "#filieres",
-    keywords: "production végétale cultures sols agriculture semences",
-  },
-  {
-    title: "Production animale",
-    titleEn: "Animal production",
-    href: "#filieres",
-    keywords: "production animale élevage animaux ferme expérimental",
-  },
-  {
-    title: "Agroéconomie",
-    titleEn: "Agricultural economics",
-    href: "#filieres",
-    keywords: "agroéconomie économie agricole marchés chaînes de valeur",
-  },
-  {
-    title: "Gestion des ressources humaines",
-    titleEn: "Human resources management",
-    href: "#filieres",
-    keywords: "gestion ressources humaines management leadership",
-  },
-];
+type SearchItem = {
+  label: string;
+  href: string;
+  keywords: string;
+};
 
 export default function Header() {
+  const [language, setLanguage] = useState<Language>("fr");
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const [language, setLanguage] = useState<"fr" | "en">("fr");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const t = translations[language];
+  const navItems: NavItem[] =
+    language === "fr"
+      ? [
+          { label: "Actualités", href: "/actualites" },
+{ label: "À propos", href: "/a-propos" },
+{ label: "Publications", href: "/publications" },
+{ label: "Recherches", href: "/recherches" },
+{ label: "Partenaires", href: "/partenaires" },
+{ label: "Alumni", href: "/alumni" },
+{ label: "Contacts", href: "/contacts" },
+        ]
+      : [
+          { label: "News", href: "/actualites" },
+{ label: "About", href: "/a-propos" },
+{ label: "Publications", href: "/publications" },
+{ label: "Research", href: "/recherches" },
+{ label: "Partners", href: "/partenaires" },
+{ label: "Alumni", href: "/alumni" },
+{ label: "Contacts", href: "/contacts" },
+        ];
 
-  const navItems = [
-    { label: t.news, href: "#actualites" },
-    { label: t.about, href: "#a-propos" },
-    { label: t.publications, href: "#publications" },
-    { label: t.research, href: "#recherche" },
-    { label: t.partners, href: "#partenaires" },
-    { label: t.alumni, href: "#alumni" },
-    { label: t.contacts, href: "#contacts" },
-  ];
+  const searchItems: SearchItem[] =
+    language === "fr"
+      ? [
+          {
+            label: "Actualités",
+            href: "/actualites",
+            keywords: "actualites news informations communiques une",
+          },
+          {
+            label: "À propos",
+            href: "#a-propos",
+            keywords: "a propos vision mission valeurs institution",
+          },
+          {
+            label: "Publications",
+            href: "#publications",
+            keywords: "publications rapports documents scientifiques",
+          },
+          {
+            label: "Recherches",
+            href: "#recherche",
+            keywords: "recherche axes scientifiques innovation",
+          },
+          {
+            label: "Partenaires",
+            href: "#partenaires",
+            keywords: "partenaires cooperation universites institutions",
+          },
+          {
+            label: "Production végétale",
+            href: "#filieres",
+            keywords: "production vegetale cultures sols semences agriculture",
+          },
+          {
+            label: "Production animale",
+            href: "#filieres",
+            keywords: "production animale elevage sante animale ferme",
+          },
+          {
+            label: "Agroéconomie",
+            href: "#filieres",
+            keywords: "agroeconomie economie agricole marches chaines valeur",
+          },
+          {
+            label: "Gestion des ressources humaines",
+            href: "#filieres",
+            keywords: "ressources humaines gestion leadership management",
+          },
+          {
+            label: "Contacts",
+            href: "#contacts",
+            keywords: "contact email telephone adresse kalemie",
+          },
+        ]
+      : [
+          {
+            label: "News",
+            href: "/actualites",
+            keywords: "news updates press featured information",
+          },
+          {
+            label: "About",
+            href: "#a-propos",
+            keywords: "about vision mission values institution",
+          },
+          {
+            label: "Publications",
+            href: "#publications",
+            keywords: "publications reports scientific documents",
+          },
+          {
+            label: "Research",
+            href: "#recherche",
+            keywords: "research scientific innovation axes",
+          },
+          {
+            label: "Partners",
+            href: "#partenaires",
+            keywords: "partners cooperation universities institutions",
+          },
+          {
+            label: "Crop production",
+            href: "#filieres",
+            keywords: "crop production agriculture seeds soils",
+          },
+          {
+            label: "Animal production",
+            href: "#filieres",
+            keywords: "animal production livestock farm",
+          },
+          {
+            label: "Agricultural economics",
+            href: "#filieres",
+            keywords: "agricultural economics markets value chains",
+          },
+          {
+            label: "Human resources management",
+            href: "#filieres",
+            keywords: "human resources leadership management",
+          },
+          {
+            label: "Contacts",
+            href: "#contacts",
+            keywords: "contact email phone address kalemie",
+          },
+        ];
 
-  const filteredResults = useMemo(() => {
-    const cleanQuery = query.trim().toLowerCase();
+  const filteredSearchItems = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
 
-    if (!cleanQuery) return searchItems;
+    if (!query) {
+      return searchItems;
+    }
 
     return searchItems.filter((item) => {
-      const title = `${item.title} ${item.titleEn} ${item.keywords}`.toLowerCase();
-      return title.includes(cleanQuery);
+      const searchableText = `${item.label} ${item.keywords}`.toLowerCase();
+      return searchableText.includes(query);
     });
-  }, [query]);
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
-
-  useEffect(() => {
-    if (!searchIsOpen) return;
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setSearchIsOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [searchIsOpen]);
+  }, [searchItems, searchQuery]);
 
   const goToSection = (href: string) => {
-    setSearchIsOpen(false);
     setMenuIsOpen(false);
+    setSearchIsOpen(false);
+    setSearchQuery("");
+
+    if (href.startsWith("/")) {
+      window.location.href = href;
+      return;
+    }
 
     const section = document.querySelector(href);
 
@@ -152,29 +182,25 @@ export default function Header() {
     }
   };
 
-  const changeLanguage = (newLanguage: "fr" | "en") => {
-    setLanguage(newLanguage);
-    setMenuIsOpen(false);
-  };
-
   return (
     <>
       <header className="site-header">
         <div className="header-inner">
-          <Link
-            href="/"
-            className="site-logo"
-            aria-label="Retour à l’accueil DSAE-UNIKAL"
-            onClick={() => setMenuIsOpen(false)}
+          <button
+            type="button"
+            className="header-brand"
+            onClick={() => goToSection("/")}
+            aria-label="Retour à l'accueil"
           >
-            <span className="logo-mark">D</span>
-            <span className="logo-text">
-              <strong>DSAE</strong>
-              <small>UNIKAL</small>
-            </span>
-          </Link>
+            <div className="brand-mark">D</div>
 
-          <nav className="desktop-nav" aria-label="Navigation principale">
+            <div className="brand-text">
+              <strong>DSAE</strong>
+              <span>UNIKAL</span>
+            </div>
+          </button>
+
+          <nav className={`header-nav ${menuIsOpen ? "is-open" : ""}`}>
             {navItems.map((item) => (
               <button
                 type="button"
@@ -188,123 +214,120 @@ export default function Header() {
 
           <div className="header-actions">
             <button
-              className="search-button"
-              aria-label={t.search}
+              type="button"
+              className="header-search-button"
               onClick={() => setSearchIsOpen(true)}
+              aria-label={
+                language === "fr" ? "Ouvrir la recherche" : "Open search"
+              }
             >
-              <span>⌕</span>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M10.8 18.1a7.3 7.3 0 1 1 0-14.6 7.3 7.3 0 0 1 0 14.6Zm0-2a5.3 5.3 0 1 0 0-10.6 5.3 5.3 0 0 0 0 10.6Zm5.6.1 4.1 4.1-1.5 1.5-4.1-4.1 1.5-1.5Z"
+                  fill="currentColor"
+                />
+              </svg>
             </button>
 
-            <div className="language-switcher" aria-label="Sélecteur de langue">
+            <div className="language-switcher" aria-label="Changer de langue">
               <button
-                className={language === "fr" ? "is-active" : ""}
-                onClick={() => changeLanguage("fr")}
                 type="button"
+                className={language === "fr" ? "is-active" : ""}
+                onClick={() => setLanguage("fr")}
               >
                 FR
               </button>
+
               <button
-                className={language === "en" ? "is-active" : ""}
-                onClick={() => changeLanguage("en")}
                 type="button"
+                className={language === "en" ? "is-active" : ""}
+                onClick={() => setLanguage("en")}
               >
                 EN
               </button>
             </div>
 
             <button
-              className={`menu-button ${menuIsOpen ? "is-open" : ""}`}
-              aria-label="Ouvrir le menu"
-              onClick={() => setMenuIsOpen((current) => !current)}
               type="button"
+              className="header-menu-button"
+              onClick={() => setMenuIsOpen((current) => !current)}
+              aria-label={
+                language === "fr"
+                  ? "Ouvrir ou fermer le menu"
+                  : "Open or close menu"
+              }
             >
-              <span />
-              <span />
+              ☰
             </button>
-          </div>
-        </div>
-
-        <div className={`mobile-menu ${menuIsOpen ? "is-visible" : ""}`}>
-          <nav aria-label="Navigation mobile">
-            {navItems.map((item) => (
-              <button
-                type="button"
-                key={item.label}
-                onClick={() => goToSection(item.href)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          <div className="mobile-menu-bottom">
-            <button type="button" onClick={() => setSearchIsOpen(true)}>
-              {t.search}
-            </button>
-
-            <div>
-              <button
-                type="button"
-                className={language === "fr" ? "is-active" : ""}
-                onClick={() => changeLanguage("fr")}
-              >
-                Français
-              </button>
-              <button
-                type="button"
-                className={language === "en" ? "is-active" : ""}
-                onClick={() => changeLanguage("en")}
-              >
-                English
-              </button>
-            </div>
           </div>
         </div>
       </header>
 
-      <div className={`search-modal ${searchIsOpen ? "is-visible" : ""}`}>
-        <div
-          className="search-backdrop"
-          onClick={() => setSearchIsOpen(false)}
-        />
+      {searchIsOpen && (
+        <div className="search-modal" role="dialog" aria-modal="true">
+          <div className="search-box">
+            <div className="search-box-header">
+              <div>
+                <span>{language === "fr" ? "DSAE-UNIKAL" : "DSAE-UNIKAL"}</span>
+                <h3>
+                  {language === "fr" ? "Recherche rapide" : "Quick search"}
+                </h3>
+              </div>
 
-        <div className="search-panel" role="dialog" aria-modal="true">
-          <div className="search-panel-top">
-            <div>
-              <span>DSAE-UNIKAL</span>
-              <h2>{t.searchTitle}</h2>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchIsOpen(false);
+                  setSearchQuery("");
+                }}
+                aria-label={
+                  language === "fr" ? "Fermer la recherche" : "Close search"
+                }
+              >
+                Fermer
+              </button>
             </div>
 
-            <button type="button" onClick={() => setSearchIsOpen(false)}>
-              {t.close}
-            </button>
-          </div>
+            <input
+              className="search-input"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder={
+                language === "fr"
+                  ? "Rechercher une page, une filière, une publication..."
+                  : "Search a page, program, publication..."
+              }
+              autoFocus
+            />
 
-          <input
-            autoFocus
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={t.searchPlaceholder}
-          />
-
-          <div className="search-results">
-            {filteredResults.length > 0 ? (
-              filteredResults.map((item) => (
+            <div className="search-results">
+              {filteredSearchItems.map((item) => (
                 <button
                   type="button"
-                  key={item.title}
+                  key={`${item.label}-${item.href}`}
                   onClick={() => goToSection(item.href)}
                 >
-                  <strong>{language === "fr" ? item.title : item.titleEn}</strong>
-                  <span>{item.href}</span>
+                  <strong>{item.label}</strong>
                 </button>
-              ))
-            ) : (
-              <p>{t.noResult}</p>
-            )}
+              ))}
+
+              {filteredSearchItems.length === 0 && (
+                <p className="search-empty">
+                  {language === "fr"
+                    ? "Aucun résultat trouvé."
+                    : "No result found."}
+                </p>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
