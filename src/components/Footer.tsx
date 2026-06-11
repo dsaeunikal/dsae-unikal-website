@@ -56,9 +56,6 @@
 >
   Université de Kalemie
 </a>
-            <a href="#">Faculté des Sciences Agronomiques</a>
-            <a href="#recherche">Recherche scientifique</a>
-            <a href="#filieres">Formation académique</a>
           </div>
 
           <div className="footer-newsletter" id="newsletter">
@@ -112,11 +109,13 @@
           <p>© {currentYear} DSAE-UNIKAL. Tous droits réservés.</p>
 
           <div className="footer-legal-links">
-            <a href="/confidentialite">Confidentialité</a>
-            <a href="#">Sécurité</a>
-            <a href="#">Cookies</a>
-            <a href="#">Conditions Générales d’Utilisation</a>
-            <a href="#">Mentions légales</a>
+            <div className="footer-legal-links">
+  <a href="/confidentialite">Confidentialité</a>
+  <a href="/securite">Sécurité</a>
+  <a href="/cookies">Cookies</a>
+  <a href="/cgu">Conditions Générales d’Utilisation</a>
+  <a href="/mentions-legales">Mentions légales</a>
+</div>
           </div>
         </div>
       </div>
