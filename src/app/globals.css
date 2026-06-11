@@ -4584,3 +4584,275 @@ img {
     font-size: 16px;
   }
 }
+/* ==========================================================
+   À PROPOS — CONTENU INSTITUTIONNEL LONG
+========================================================== */
+
+.about-editorial {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.about-editorial p {
+  margin: 0 0 28px;
+  color: rgba(4, 37, 27, 0.76);
+  font-size: clamp(17px, 1.25vw, 20px);
+  line-height: 1.9;
+}
+
+.about-expertise,
+.about-governance {
+  width: 100%;
+}
+
+.about-filiere-list {
+  display: grid;
+  gap: 86px;
+  margin-top: 80px;
+}
+
+.about-filiere {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-filiere-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  background: #f3efe6;
+}
+
+.about-filiere-image img {
+  object-fit: cover;
+}
+
+.about-filiere-content h3 {
+  margin: 0 0 26px;
+  color: #04251b;
+  font-size: clamp(42px, 4.5vw, 82px);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+}
+
+.about-filiere-content p {
+  margin: 0 0 24px;
+  color: rgba(4, 37, 27, 0.72);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.about-team-section {
+  margin-top: 90px;
+}
+
+.about-team-section h3 {
+  margin: 0 0 36px;
+  color: #04251b;
+  font-size: clamp(42px, 5vw, 86px);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+  text-align: center;
+}
+
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.about-team-card {
+  background: #f7f3ea;
+  border: 1px solid rgba(4, 37, 27, 0.08);
+}
+
+.about-team-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  overflow: hidden;
+  background: #e9e3d4;
+}
+
+.about-team-photo img {
+  object-fit: cover;
+}
+
+.about-team-card div:last-child {
+  padding: 24px;
+}
+
+.about-team-card span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #b88916;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.about-team-card h4 {
+  margin: 0;
+  color: #04251b;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.about-team-card p {
+  margin: 16px 0 0;
+  color: rgba(4, 37, 27, 0.68);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.about-rank-list {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.about-rank-list div {
+  padding: 22px 26px;
+  background: #f7f3ea;
+  border: 1px solid rgba(4, 37, 27, 0.08);
+  color: #04251b;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+@media (max-width: 1100px) {
+  .about-filiere {
+    grid-template-columns: 1fr;
+  }
+
+  .about-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-filiere-image {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 720px) {
+  .about-editorial {
+    width: 100%;
+  }
+
+  .about-editorial p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .about-filiere-list {
+    gap: 64px;
+    margin-top: 58px;
+  }
+
+  .about-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-team-section {
+    margin-top: 64px;
+  }
+
+  .about-team-section h3,
+  .about-filiere-content h3 {
+    font-size: clamp(38px, 11vw, 62px);
+  }
+}
+
+/* ==========================================================
+   À PROPOS — CORPS ENSEIGNANT EN ACCORDÉON
+========================================================== */
+
+.about-rank-list {
+  display: none;
+}
+
+.about-rank-accordion {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.about-rank-panel {
+  width: 100%;
+}
+
+.about-rank-button {
+  width: 100%;
+  min-height: 82px;
+  border: 1px solid rgba(4, 37, 27, 0.08);
+  background: #f7f3ea;
+  color: #04251b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 28px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.about-rank-button span {
+  display: block;
+  color: #04251b;
+  font-size: clamp(18px, 1.4vw, 24px);
+  font-weight: 950;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: -0.035em;
+}
+
+.about-rank-button:hover,
+.about-rank-button.is-active {
+  background: #efe7d7;
+  border-color: rgba(4, 37, 27, 0.16);
+  transform: translateY(-1px);
+}
+
+.about-rank-members {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding: 32px 0 18px;
+}
+
+.about-rank-members .about-team-card {
+  height: 100%;
+}
+
+@media (max-width: 1100px) {
+  .about-rank-members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .about-rank-accordion {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .about-rank-button {
+    min-height: 72px;
+    padding: 18px 20px;
+  }
+
+  .about-rank-members {
+    grid-template-columns: 1fr;
+    padding: 24px 0 14px;
+  }
+}
