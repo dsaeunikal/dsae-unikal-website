@@ -49,7 +49,13 @@
 
           <div className="footer-column">
             <span>Institution</span>
-            <a href="#">Université de Kalemie</a>
+            <a
+  href="https://unikal.ac.cd/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Université de Kalemie
+</a>
             <a href="#">Faculté des Sciences Agronomiques</a>
             <a href="#recherche">Recherche scientifique</a>
             <a href="#filieres">Formation académique</a>
